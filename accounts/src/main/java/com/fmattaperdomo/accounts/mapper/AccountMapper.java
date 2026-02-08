@@ -7,13 +7,13 @@ import com.fmattaperdomo.accounts.entity.Account;
 public class AccountMapper {
     public static AccountRequestDto mapToAccountRequestDto(Account account, AccountRequestDto accountRequestDto) {
         accountRequestDto.setAccountType(account.getAccountType());
-        accountRequestDto.setBranchAddress(account.getBranchAddress());
+        accountRequestDto.setBranchName(account.getBranchName());
         return accountRequestDto;
     }
 
     public static Account mapToAccountRequest(AccountRequestDto accountsDto, Account account) {
         account.setAccountType(accountsDto.getAccountType());
-        account.setBranchAddress(accountsDto.getBranchAddress());
+        account.setBranchName(accountsDto.getBranchName());
         return account;
     }
 
@@ -23,7 +23,7 @@ public class AccountMapper {
         accountResponseDto.setAccountNumber(account.getAccountNumber());
         accountResponseDto.setAccountStatus(account.getAccountStatus());
         accountResponseDto.setAccountType(account.getAccountType());
-        accountResponseDto.setBranchAddress(account.getBranchAddress());
+        accountResponseDto.setBranchName(account.getBranchName());
         return accountResponseDto;
     }
 
@@ -33,8 +33,7 @@ public class AccountMapper {
         account.setAccountNumber(accountResponseDto.getAccountNumber());
         account.setAccountStatus(accountResponseDto.getAccountStatus());
         account.setAccountType(accountResponseDto.getAccountType());
-        account.setBranchAddress(accountResponseDto.getBranchAddress());
+        account.setBranchName(accountResponseDto.getBranchName());
         return account;
     }
-
 }

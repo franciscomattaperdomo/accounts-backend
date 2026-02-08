@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `customer_id` int NOT NULL,
   `account_number` int NOT NULL,
   `account_type` varchar(100) NOT NULL,
-  `branch_address` varchar(200) NOT NULL,
+  `branch_name` varchar(100) NOT NULL,
   `account_status` varchar(20) NOT NULL,
   `created_at` date NOT NULL,
   `created_by` varchar(20) NOT NULL,

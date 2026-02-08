@@ -2,7 +2,7 @@ package com.fmattaperdomo.accounts.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -16,9 +16,10 @@ public class AccountRequestDto {
             description = "Account type", example = "Savings or checking"
     )
     private String accountType;
-    @NotEmpty(message = "Branch address can not be a null or empty")
+    @NotEmpty(message = "Branch name can not be a null or empty")
+    @Size(min = 5, max = 100, message = "The length of the branch name should be between 5 and 100")
     @Schema(
-            description = "Branch address", example = "123 NewYork"
+            description = "Branch name", example = "Castellana"
     )
-    private String branchAddress;
+    private String branchName;
 }

@@ -27,9 +27,9 @@ public class AccountResponseDto {
     )
     private String accountType;
     @Schema(
-            description = "Branch address in the response"
+            description = "Branch name in the response"
     )
-    private String branchAddress;
+    private String branchName;
     @Schema(
             description = "Account status in the response"
     )
