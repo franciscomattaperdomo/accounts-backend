@@ -12,7 +12,7 @@ import lombok.Data;
         name = "Customer",
         description = "Schema to hold Customer and Account information"
 )
-public class CustomerDto {
+public class CustomerRequestDto {
     @NotEmpty(message = "Document type can not be a null or empty")
     @Size(min = 2, max = 3, message = "The length of the document type should be between 2 and 3")
     @Schema(
@@ -25,7 +25,6 @@ public class CustomerDto {
             description = "Document number", example = "49555111"
     )
     private String documentNumber;
-
     @Schema(
             description = "Name of the customer", example = "Pepito Perez"
     )
@@ -39,15 +38,9 @@ public class CustomerDto {
     @NotEmpty(message = "Email address can not be a null or empty")
     @Email(message = "Email address should be a valid value")
     private String email;
-
     @Schema(
             description = "Mobile Number of the customer", example = "3204445555"
     )
     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
     private String mobileNumber;
-
-    @Schema(
-            description = "Account details of the Customer"
-    )
-    private AccountDto accountsDto;
 }
