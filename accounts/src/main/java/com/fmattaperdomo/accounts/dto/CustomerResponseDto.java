@@ -1,9 +1,11 @@
 package com.fmattaperdomo.accounts.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @AllArgsConstructor @NoArgsConstructor
 @Schema(
         name = "CustomerResponse",
         description = "Schema to hold customer response information"

@@ -110,10 +110,10 @@ public class AccountServiceImpl implements AccountService {
      * @return list of accounts details
      */
     @Override
-    public List<AccountResponseDto> getAccountsByBrandName(String branchName) {
-        List<Account> accounts = accountRepository.findByBrandName(branchName);
+    public List<AccountResponseDto> getAccountsByBranchName(String branchName) {
+        List<Account> accounts = accountRepository.findByBranchName(branchName);
         if(accounts.isEmpty()) {
-            throw new ResourceNotFoundException("Account","brandName",branchName);
+            throw new ResourceNotFoundException("Account","branchName",branchName);
         }
 
         return accounts.stream()

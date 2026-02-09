@@ -35,7 +35,7 @@ public interface AccountService {
      * @param branchName - Input brand name
      * @return list Account indicating if the search of Account details is successful or not
      */
-    List<AccountResponseDto> getAccountsByBrandName(String branchName);
+    List<AccountResponseDto> getAccountsByBranchName(String branchName);
     /**
      *
      * @param accountType - Input brand name
@@ -44,7 +44,7 @@ public interface AccountService {
     List<AccountResponseDto> getAccountsByAccountType(String accountType);
     /**
      *
-     * @param accountStatus - Input brand name
+     * @param accountStatus - Input account status
      * @return list Account indicating if the search of Account details is successful or not
      */
     List<AccountResponseDto> getAccountsByAccountStatus(String accountStatus);

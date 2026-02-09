@@ -32,7 +32,7 @@ public interface CustomerService {
      * @param customerRequestDto - CustomerDto Object
      * @return boolean indicating if the update of Account details is successful or not
      */
-    boolean updateCustomer(CustomerRequestDto customerRequestDto);
+    boolean updateCustomer(CustomerRequestDto customerRequestDto,Long accountId);
     /**
      *
      * @param customerId - Input customer ID
