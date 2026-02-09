@@ -29,6 +29,12 @@ public interface AccountService {
      * @param customerId - Input Customer ID
      * @return get Account indicating if the search of Account details is successful or not
      */
+    AccountResponseDto getAccountByCustomerId(Long customerId);
+    /**
+     *
+     * @param customerId - Input Customer ID
+     * @return get Account indicating if the search of Account details is successful or not
+     */
     List<AccountResponseDto> getAccountsByCustomerId(Long customerId);
     /**
      *

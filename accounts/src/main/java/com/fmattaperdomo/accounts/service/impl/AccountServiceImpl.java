@@ -89,6 +89,18 @@ public class AccountServiceImpl implements AccountService {
         return true;
     }
 
+    @Override
+    public AccountResponseDto getAccountByCustomerId(Long customerId) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "customerId", customerId.toString())
+        );
+        Account account = accountRepository.findByCustomerIdAndAccountStatus(customerId,"Active").orElseThrow(
+                () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
+        );
+        AccountResponseDto accountResponseDto = AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto());
+        return accountResponseDto;
+    }
+
     /**
      * @param customerId - Input Customer id
      * @return list of accounts details
