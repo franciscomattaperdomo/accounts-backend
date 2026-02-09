@@ -2,6 +2,7 @@ package com.fmattaperdomo.accounts.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
         description = "Schema to hold Account information"
 )
 public class AccountCreateRequestDto {
-    @NotEmpty(message = "Customer ID can not be a null or empty")
+    @Positive(message = "Customer Id should be greater than zero")
     @Schema(
             description = "Customer Id", example = "1"
     )

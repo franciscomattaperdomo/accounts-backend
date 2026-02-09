@@ -17,7 +17,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByAccountType(String accountType);
     List<Account> findByAccountStatus(String accountStatus);
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     @Modifying
     void deleteByCustomerId(Long customerId);
 }

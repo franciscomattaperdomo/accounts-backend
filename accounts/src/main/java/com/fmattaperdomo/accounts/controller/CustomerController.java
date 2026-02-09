@@ -47,8 +47,7 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @PostMapping("/customers")
     public ResponseEntity<ResponseDto> createCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto) {
         customerService.createCustomer(customerRequestDto);
@@ -56,7 +55,6 @@ public class CustomerController {
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDto(CustomerConstant.STATUS_201, CustomerConstant.MESSAGE_201));
     }
-
     @Operation(
             summary = "Fetch Customer Details REST API",
             description = "REST API to fetch customer  based on a customer id"
@@ -77,15 +75,13 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/customers/{customerId}")
     public ResponseEntity<CustomerResponseDto> getCustomerById(@PathVariable
                                                                             Long customerId) {
         CustomerResponseDto customerResponseDto = customerService.getCustomerById(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
     }
-
     @Operation(
             summary = "Fetch Customer Details REST API",
             description = "REST API to fetch customer  based on a mobile number"
@@ -106,14 +102,12 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/customers/mobileNumber/{mobileNumber}")
     public ResponseEntity<CustomerResponseDto> getCustomerByMobileNumber(@PathVariable String mobileNumber) {
         CustomerResponseDto customerResponseDto = customerService.getCustomerByMobileNumber(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
     }
-
     @Operation(
             summary = "Fetch Customer Details REST API",
             description = "REST API to fetch customer  based on a email"
@@ -134,14 +128,12 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/customers/email/{email}")
     public ResponseEntity<CustomerResponseDto> getCustomerByEmail(@PathVariable String email) {
         CustomerResponseDto customerResponseDto = customerService.getCustomerByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
     }
-
     @Operation(
             summary = "Fetch Customer Details REST API",
             description = "REST API to fetch Customers  "
@@ -162,14 +154,12 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/customers")
     public ResponseEntity<List<CustomerResponseDto>> getCustomer() {
         List<CustomerResponseDto> customersResponseDto = customerService.getCustomers();
         return ResponseEntity.status(HttpStatus.OK).body(customersResponseDto);
     }
-
     @Operation(
             summary = "Update Customer Details REST API",
             description = "REST API to update Customer details based on a customer id"
@@ -186,8 +176,7 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @PutMapping("/customers/{customerId}")
     public ResponseEntity<ResponseDto> updateCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto, @PathVariable
     Long customerId) {
@@ -202,7 +191,6 @@ public class CustomerController {
                     .body(new ResponseDto(CustomerConstant.STATUS_417, CustomerConstant.MESSAGE_417_UPDATE));
         }
     }
-
     @Operation(
             summary = "Delete Customer  Details REST API",
             description = "REST API to delete Customer details based on a customer id"
@@ -223,8 +211,7 @@ public class CustomerController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @DeleteMapping("/customers/{customerId}")
     public ResponseEntity<ResponseDto> deleteCustomer(@PathVariable
                                                      Long customerId) {
@@ -239,5 +226,4 @@ public class CustomerController {
                     .body(new ResponseDto(CustomerConstant.STATUS_417, CustomerConstant.MESSAGE_417_DELETE));
         }
     }
-
 }

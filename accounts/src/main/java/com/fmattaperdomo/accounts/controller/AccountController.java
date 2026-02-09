@@ -47,8 +47,7 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @PostMapping("/accounts")
     public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody AccountCreateRequestDto accountCreateRequestDto) {
         accountService.createAccount(accountCreateRequestDto);
@@ -56,7 +55,6 @@ public class AccountController {
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDto(AccountConstant.STATUS_201, AccountConstant.MESSAGE_201));
     }
-
     @Operation(
             summary = "Fetch Account Details REST API",
             description = "REST API to fetch accounts  based on a customer id"
@@ -77,15 +75,13 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/accounts/customerId/{customerId}")
     public ResponseEntity<List<AccountResponseDto>> getAccountsByCustomerId(@PathVariable
                                                            Long customerId) {
         List<AccountResponseDto> accountsResponseDto = accountService.getAccountsByCustomerId(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(accountsResponseDto);
     }
-
     @Operation(
             summary = "Fetch Account Details REST API",
             description = "REST API to fetch accounts  based on a branch name"
@@ -106,15 +102,13 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/accounts/branchName/{branchName}")
     public ResponseEntity<List<AccountResponseDto>> getAccountsByBranchName(@PathVariable
                                                                            String branchName) {
         List<AccountResponseDto> accountsResponseDto = accountService.getAccountsByBranchName(branchName);
         return ResponseEntity.status(HttpStatus.OK).body(accountsResponseDto);
     }
-
     @Operation(
             summary = "Fetch Account Details REST API",
             description = "REST API to fetch accounts  based on a account type"
@@ -135,16 +129,13 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/accounts/accountType/{accountType}")
     public ResponseEntity<List<AccountResponseDto>> getAccountsByAccountType(@PathVariable
                                                                             String accountType) {
         List<AccountResponseDto> accountsResponseDto = accountService.getAccountsByAccountType(accountType);
         return ResponseEntity.status(HttpStatus.OK).body(accountsResponseDto);
     }
-
-
     @Operation(
             summary = "Fetch Account Details REST API",
             description = "REST API to fetch accounts  based on a account type"
@@ -165,15 +156,13 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/accounts/accountStatus/{accountStatus}")
     public ResponseEntity<List<AccountResponseDto>> getAccountsByAccountStatus(@PathVariable
                                                                              String accountStatus) {
         List<AccountResponseDto> accountsResponseDto = accountService.getAccountsByAccountStatus(accountStatus);
         return ResponseEntity.status(HttpStatus.OK).body(accountsResponseDto);
     }
-
     @Operation(
             summary = "Fetch Account Details REST API",
             description = "REST API to fetch Account  based on a customer id"
@@ -190,15 +179,13 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @GetMapping("/accounts")
     public ResponseEntity<AccountResponseDto> getAccountByCustomerId(@RequestParam
                                                                       Long customerId) {
         AccountResponseDto accountResponseDto = accountService.getAccountByCustomerId(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(accountResponseDto);
     }
-
     @Operation(
             summary = "Update Account Details REST API",
             description = "REST API to update Account details based on a account id"
@@ -235,7 +222,6 @@ public class AccountController {
                     .body(new ResponseDto(AccountConstant.STATUS_417, AccountConstant.MESSAGE_417_UPDATE));
         }
     }
-
     @Operation(
             summary = "Delete Account  Details REST API",
             description = "REST API to delete Account details based on a account id"
@@ -256,8 +242,7 @@ public class AccountController {
                             schema = @Schema(implementation = ErrorResponseDto.class)
                     )
             )
-    }
-    )
+    })
     @DeleteMapping("/accounts/{accountId}")
     public ResponseEntity<ResponseDto> deleteAccount(@PathVariable
                                                             Long accountId) {

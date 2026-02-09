@@ -88,6 +88,8 @@ public class CustomerServiceImpl implements CustomerService {
                 .toList();
     }
 
+    @Transactional(readOnly = false)
+    @Modifying
     @Override
     public void createCustomer(CustomerRequestDto customerRequestDto) {
         Customer customer = CustomerMapper.mapToCustomerRequest(customerRequestDto, new Customer());
@@ -112,6 +114,8 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.save(customer);
     }
 
+    @Transactional(readOnly = false)
+    @Modifying
     @Override
     public boolean updateCustomer(CustomerRequestDto customerRequestDto,Long customerId) {
         boolean isUpdated = false;
@@ -143,7 +147,7 @@ public class CustomerServiceImpl implements CustomerService {
         return  isUpdated;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     @Modifying
     @Override
     public boolean deleteCustomer(Long customerId) {
