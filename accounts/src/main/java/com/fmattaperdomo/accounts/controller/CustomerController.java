@@ -152,6 +152,10 @@ public class CustomerController {
                     description = "HTTP Status OK"
             ),
             @ApiResponse(
+                    responseCode = "404",
+                    description = "HTTP Status Not Found"
+            ),
+            @ApiResponse(
                     responseCode = "500",
                     description = "HTTP Status Internal Server Error",
                     content = @Content(
@@ -174,10 +178,6 @@ public class CustomerController {
             @ApiResponse(
                     responseCode = "200",
                     description = "HTTP Status OK"
-            ),
-            @ApiResponse(
-                    responseCode = "417",
-                    description = "Expectation Failed"
             ),
             @ApiResponse(
                     responseCode = "500",

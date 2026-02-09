@@ -79,7 +79,7 @@ public class AccountController {
             )
     }
     )
-    @GetMapping("/accounts/customer/{customerId}")
+    @GetMapping("/accounts/customerId/{customerId}")
     public ResponseEntity<List<AccountResponseDto>> getAccountsByCustomerId(@PathVariable
                                                            Long customerId) {
         List<AccountResponseDto> accountsResponseDto = accountService.getAccountsByCustomerId(customerId);

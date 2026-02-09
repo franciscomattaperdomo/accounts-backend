@@ -12,10 +12,10 @@ import com.fmattaperdomo.accounts.mapper.CustomerMapper;
 import com.fmattaperdomo.accounts.repository.AccountRepository;
 import com.fmattaperdomo.accounts.repository.CustomerRepository;
 import com.fmattaperdomo.accounts.service.CustomerService;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -143,7 +143,7 @@ public class CustomerServiceImpl implements CustomerService {
         return  isUpdated;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Modifying
     @Override
     public boolean deleteCustomer(Long customerId) {
