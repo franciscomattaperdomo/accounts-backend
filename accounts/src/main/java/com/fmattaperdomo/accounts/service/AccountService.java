@@ -1,22 +1,23 @@
 package com.fmattaperdomo.accounts.service;
 
-import com.fmattaperdomo.accounts.dto.AccountRequestDto;
+import com.fmattaperdomo.accounts.dto.AccountCreateRequestDto;
 import com.fmattaperdomo.accounts.dto.AccountResponseDto;
+import com.fmattaperdomo.accounts.dto.AccountUpdateRequestDto;
 
 import java.util.List;
 
 public interface AccountService {
     /**
      *
-     * @param customerRequestDto - CustomerRequestDto Object
+     * @param accountCreateRequestDto - CustomerRequestDto Object
      */
-    void createAccount(AccountRequestDto customerRequestDto);
+    void createAccount(AccountCreateRequestDto accountCreateRequestDto);
     /**
      *
-     * @param customerRequestDto - CustomerDto Object
+     * @param accountUpdateRequestDto - CustomerDto Object
      * @return boolean indicating if the update of Account details is successful or not
      */
-    boolean updateAccount(AccountRequestDto customerRequestDto);
+    boolean updateAccount(AccountUpdateRequestDto accountUpdateRequestDto, Long accountId);
     /**
      *
      * @param accountId - Input Account ID
@@ -28,23 +29,23 @@ public interface AccountService {
      * @param customerId - Input Customer ID
      * @return get Account indicating if the search of Account details is successful or not
      */
-    AccountResponseDto getAccountByCustomerId(Long customerId);
+    List<AccountResponseDto> getAccountsByCustomerId(Long customerId);
     /**
      *
      * @param branchName - Input brand name
      * @return list Account indicating if the search of Account details is successful or not
      */
-    List<AccountResponseDto> getAccountByBrandName(String branchName);
+    List<AccountResponseDto> getAccountsByBrandName(String branchName);
     /**
      *
      * @param accountType - Input brand name
      * @return list Account indicating if the search of Account details is successful or not
      */
-    List<AccountResponseDto> getAccountByAccountType(String accountType);
+    List<AccountResponseDto> getAccountsByAccountType(String accountType);
     /**
      *
      * @param accountStatus - Input brand name
      * @return list Account indicating if the search of Account details is successful or not
      */
-    List<AccountResponseDto> getAccountByAccountStatus(String accountStatus);
+    List<AccountResponseDto> getAccountsByAccountStatus(String accountStatus);
 }

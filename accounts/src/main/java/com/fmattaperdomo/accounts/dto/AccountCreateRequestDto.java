@@ -3,14 +3,21 @@ package com.fmattaperdomo.accounts.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @AllArgsConstructor @NoArgsConstructor
 @Schema(
         name = "Accounts",
         description = "Schema to hold Account information"
 )
-public class AccountRequestDto {
+public class AccountCreateRequestDto {
+    @NotEmpty(message = "Customer ID can not be a null or empty")
+    @Schema(
+            description = "Customer Id", example = "1"
+    )
+    private Long customerId;
     @NotEmpty(message = "Account type can not be a null or empty")
     @Schema(
             description = "Account type", example = "Savings or checking"
