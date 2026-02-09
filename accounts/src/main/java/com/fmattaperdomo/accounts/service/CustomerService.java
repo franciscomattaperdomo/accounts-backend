@@ -3,6 +3,8 @@ package com.fmattaperdomo.accounts.service;
 import com.fmattaperdomo.accounts.dto.CustomerRequestDto;
 import com.fmattaperdomo.accounts.dto.CustomerResponseDto;
 
+import java.util.List;
+
 public interface CustomerService {
     /**
      *
@@ -22,6 +24,11 @@ public interface CustomerService {
      * @return Customer Details based on a given email
      */
     CustomerResponseDto getCustomerById(Long customerId);
+    /**
+     *
+     * @return List of All customers Details
+     */
+    List<CustomerResponseDto> getCustomers();
     /**
      *
      * @param customerRequestDto - CustomerRequestDto Object

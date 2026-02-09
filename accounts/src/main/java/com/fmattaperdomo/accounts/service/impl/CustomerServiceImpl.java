@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.repository.Modifying;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -65,6 +66,26 @@ public class CustomerServiceImpl implements CustomerService {
         }
         CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
         return customerResponseDto;
+    }
+
+    @Override
+    public List<CustomerResponseDto> getCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        if(customers.isEmpty()) {
+            throw new ResourceNotFoundException("Customer","customer","All");
+        }
+
+        return customers.stream()
+                .map(customer -> {
+                    Optional<Account> optionalAccount = accountRepository.findByCustomerIdAndAccountStatus(customer.getCustomerId(),"Active");
+                    AccountResponseDto accountResponseDto = new AccountResponseDto();
+                    if(optionalAccount.isPresent()) {
+                        accountResponseDto = AccountMapper.mapToAccountResponseDto(optionalAccount.get(), new AccountResponseDto());
+                    }
+                    CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
+                    return customerResponseDto;
+                })
+                .toList();
     }
 
     @Override
