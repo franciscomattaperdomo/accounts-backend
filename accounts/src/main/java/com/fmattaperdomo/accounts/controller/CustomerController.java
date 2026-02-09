@@ -22,8 +22,9 @@ import java.util.List;
 
 @Tag(
         name = "CRUD REST APIs for Customers",
-        description = "CRUD REST APIs in Customer to CREATE, UPDATE, GET AND DELETE customer details"
+        description = "CRUD REsEST APIs in Customer to CREATE, UPDATE, GET AND DELETE customer details"
 )
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping(path="/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor

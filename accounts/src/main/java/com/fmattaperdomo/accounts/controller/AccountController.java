@@ -24,6 +24,7 @@ import java.util.List;
         name = "CRUD REST APIs for Accounts",
         description = "CRUD REST APIs in Account to CREATE, UPDATE, GET AND DELETE account details"
 )
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping(path="/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
