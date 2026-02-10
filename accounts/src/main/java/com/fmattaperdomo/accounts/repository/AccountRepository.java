@@ -13,9 +13,9 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByCustomerIdAndAccountStatus(Long customerId, String accountStatus);
     List<Account> findByCustomerId(Long customerId);
-    List<Account> findByBranchName(String branchName);
-    List<Account> findByAccountType(String accountType);
-    List<Account> findByAccountStatus(String accountStatus);
+    List<Account> findByBranchNameContainingIgnoreCase(String branchName);
+    List<Account> findByAccountTypeContainingIgnoreCase(String accountType);
+    List<Account> findByAccountStatusContainingIgnoreCase(String accountStatus);
 
     @Transactional(readOnly = false)
     @Modifying

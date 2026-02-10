@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 
@@ -105,7 +106,9 @@ public class CustomerController {
             )
     })
     @GetMapping("/customers/mobileNumber/{mobileNumber}")
-    public ResponseEntity<CustomerResponseDto> getCustomerByMobileNumber(@PathVariable String mobileNumber) {
+    public ResponseEntity<CustomerResponseDto> getCustomerByMobileNumber(@PathVariable
+                                                                             @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                                             String mobileNumber) {
         CustomerResponseDto customerResponseDto = customerService.getCustomerByMobileNumber(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
     }
@@ -131,7 +134,9 @@ public class CustomerController {
             )
     })
     @GetMapping("/customers/email/{email}")
-    public ResponseEntity<CustomerResponseDto> getCustomerByEmail(@PathVariable String email) {
+    public ResponseEntity<CustomerResponseDto> getCustomerByEmail(@PathVariable
+                                                                  @Pattern(regexp="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",message = "Email not is valid")
+                                                                  String email) {
         CustomerResponseDto customerResponseDto = customerService.getCustomerByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
     }

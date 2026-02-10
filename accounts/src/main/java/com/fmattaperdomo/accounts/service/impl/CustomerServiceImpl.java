@@ -121,18 +121,18 @@ public class CustomerServiceImpl implements CustomerService {
         boolean isUpdated = false;
         if(customerRequestDto !=null ){
             Optional<Customer> optionalCustomer;
-            optionalCustomer = customerRepository.findByEmail(customerRequestDto.getEmail());
-            if(optionalCustomer.isPresent() && optionalCustomer.get().getCustomerId() != customerId) {
+            optionalCustomer = customerRepository.findByEmailAndCustomerIdNot(customerRequestDto.getEmail(),customerId);
+            if(optionalCustomer.isPresent()) {
                 throw new CustomerAlreadyExistsException("Customer already registered with given email "
                         +customerRequestDto.getEmail());
             }
-            optionalCustomer = customerRepository.findByMobileNumber(customerRequestDto.getMobileNumber());
-            if(optionalCustomer.isPresent() && optionalCustomer.get().getCustomerId() != customerId) {
+            optionalCustomer = customerRepository.findByMobileNumberAndCustomerIdNot(customerRequestDto.getMobileNumber(),customerId);
+            if(optionalCustomer.isPresent()) {
                 throw new CustomerAlreadyExistsException("Customer already registered with given mobile number "
                         +customerRequestDto.getMobileNumber());
             }
-            optionalCustomer = customerRepository.findByDocumentNumber(customerRequestDto.getDocumentNumber());
-            if(optionalCustomer.isPresent() && optionalCustomer.get().getCustomerId() != customerId) {
+            optionalCustomer = customerRepository.findByDocumentNumberAndCustomerIdNot(customerRequestDto.getDocumentNumber(),customerId);
+            if(optionalCustomer.isPresent()) {
                 throw new CustomerAlreadyExistsException("Customer already registered with given document number "
                         +customerRequestDto.getDocumentNumber());
             }

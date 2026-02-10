@@ -123,7 +123,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public List<AccountResponseDto> getAccountsByBranchName(String branchName) {
-        List<Account> accounts = accountRepository.findByBranchName(branchName);
+        List<Account> accounts = accountRepository.findByBranchNameContainingIgnoreCase(branchName);
         if(accounts.isEmpty()) {
             throw new ResourceNotFoundException("Account","branchName",branchName);
         }
@@ -139,7 +139,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public List<AccountResponseDto> getAccountsByAccountType(String accountType) {
-        List<Account> accounts = accountRepository.findByAccountType(accountType);
+        List<Account> accounts = accountRepository.findByAccountTypeContainingIgnoreCase(accountType);
         if(accounts.isEmpty()) {
             throw new ResourceNotFoundException("Account","accountType",accountType);
         }
@@ -156,7 +156,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountResponseDto> getAccountsByAccountStatus(String accountStatus) {
-        List<Account> accounts = accountRepository.findByAccountStatus(accountStatus);
+        List<Account> accounts = accountRepository.findByAccountStatusContainingIgnoreCase(accountStatus);
         if(accounts.isEmpty()) {
             throw new ResourceNotFoundException("Account","accountType",accountStatus);
         }
