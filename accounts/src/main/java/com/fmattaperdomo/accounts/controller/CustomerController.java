@@ -94,10 +94,6 @@ public class CustomerController {
                     description = "HTTP Status OK"
             ),
             @ApiResponse(
-                    responseCode = "404",
-                    description = "HTTP Status Not Found"
-            ),
-            @ApiResponse(
                     responseCode = "500",
                     description = "HTTP Status Internal Server Error",
                     content = @Content(
@@ -106,11 +102,10 @@ public class CustomerController {
             )
     })
     @GetMapping("/customers/mobileNumber/{mobileNumber}")
-    public ResponseEntity<CustomerResponseDto> getCustomerByMobileNumber(@PathVariable
-                                                                             @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+    public ResponseEntity<List<CustomerResponseDto>> getCustomersByMobileNumber(@PathVariable
                                                                              String mobileNumber) {
-        CustomerResponseDto customerResponseDto = customerService.getCustomerByMobileNumber(mobileNumber);
-        return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
+        List<CustomerResponseDto> customersResponseDto = customerService.getCustomersByMobileNumber(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(customersResponseDto);
     }
     @Operation(
             summary = "Fetch Customer Details REST API",
@@ -122,8 +117,23 @@ public class CustomerController {
                     description = "HTTP Status OK"
             ),
             @ApiResponse(
-                    responseCode = "404",
-                    description = "HTTP Status Not Found"
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/customers/email/{email}")
+    public ResponseEntity<List<CustomerResponseDto>> getCustomersByEmail(@PathVariable
+                                                                  String email) {
+        List<CustomerResponseDto> customersResponseDto = customerService.getCustomersByEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(customersResponseDto);
+    }
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
             ),
             @ApiResponse(
                     responseCode = "500",
@@ -133,12 +143,11 @@ public class CustomerController {
                     )
             )
     })
-    @GetMapping("/customers/email/{email}")
-    public ResponseEntity<CustomerResponseDto> getCustomerByEmail(@PathVariable
-                                                                  @Pattern(regexp="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",message = "Email not is valid")
-                                                                  String email) {
-        CustomerResponseDto customerResponseDto = customerService.getCustomerByEmail(email);
-        return ResponseEntity.status(HttpStatus.OK).body(customerResponseDto);
+    @GetMapping("/customers/name/{name}")
+    public ResponseEntity<List<CustomerResponseDto>> getCustomersByName(@PathVariable
+                                                                         String name) {
+        List<CustomerResponseDto> customersResponseDto = customerService.getCustomersByName(name);
+        return ResponseEntity.status(HttpStatus.OK).body(customersResponseDto);
     }
     @Operation(
             summary = "Fetch Customer Details REST API",
@@ -150,10 +159,6 @@ public class CustomerController {
                     description = "HTTP Status OK"
             ),
             @ApiResponse(
-                    responseCode = "404",
-                    description = "HTTP Status Not Found"
-            ),
-            @ApiResponse(
                     responseCode = "500",
                     description = "HTTP Status Internal Server Error",
                     content = @Content(
@@ -162,7 +167,7 @@ public class CustomerController {
             )
     })
     @GetMapping("/customers")
-    public ResponseEntity<List<CustomerResponseDto>> getCustomer() {
+    public ResponseEntity<List<CustomerResponseDto>> getCustomers() {
         List<CustomerResponseDto> customersResponseDto = customerService.getCustomers();
         return ResponseEntity.status(HttpStatus.OK).body(customersResponseDto);
     }

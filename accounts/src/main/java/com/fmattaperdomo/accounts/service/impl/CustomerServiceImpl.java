@@ -27,31 +27,54 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public CustomerResponseDto getCustomerByMobileNumber(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
-        );
-        Optional<Account> optionalAccount = accountRepository.findByCustomerIdAndAccountStatus(customer.getCustomerId(),"Active");
-        AccountResponseDto accountResponseDto = new AccountResponseDto();
-        if(optionalAccount.isPresent()) {
-            accountResponseDto = AccountMapper.mapToAccountResponseDto(optionalAccount.get(), new AccountResponseDto());
-        }
-        CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
-        return customerResponseDto;
+    public List<CustomerResponseDto> getCustomersByName(String name) {
+        List<Customer> customers = customerRepository.findByNameContainingIgnoreCase(name);
+
+        return customers.stream()
+                .map(customer -> {
+                    Optional<Account> optionalAccount = accountRepository.findByCustomerIdAndAccountStatus(customer.getCustomerId(),"Active");
+                    AccountResponseDto accountResponseDto = new AccountResponseDto();
+                    if(optionalAccount.isPresent()) {
+                        accountResponseDto = AccountMapper.mapToAccountResponseDto(optionalAccount.get(), new AccountResponseDto());
+                    }
+                    CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
+                    return customerResponseDto;
+                })
+                .toList();
     }
 
     @Override
-    public CustomerResponseDto getCustomerByEmail(String email) {
-        Customer customer = customerRepository.findByEmail(email).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "email", email)
-        );
-        Optional<Account> optionalAccount = accountRepository.findByCustomerIdAndAccountStatus(customer.getCustomerId(),"Active");
-        AccountResponseDto accountResponseDto = new AccountResponseDto();
-        if(optionalAccount.isPresent()) {
-            accountResponseDto = AccountMapper.mapToAccountResponseDto(optionalAccount.get(), new AccountResponseDto());
-        }
-        CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
-        return customerResponseDto;
+    public List<CustomerResponseDto> getCustomersByMobileNumber(String mobileNumber) {
+        List<Customer> customers = customerRepository.findByMobileNumberContainingIgnoreCase(mobileNumber);
+
+        return customers.stream()
+                .map(customer -> {
+                    Optional<Account> optionalAccount = accountRepository.findByCustomerIdAndAccountStatus(customer.getCustomerId(),"Active");
+                    AccountResponseDto accountResponseDto = new AccountResponseDto();
+                    if(optionalAccount.isPresent()) {
+                        accountResponseDto = AccountMapper.mapToAccountResponseDto(optionalAccount.get(), new AccountResponseDto());
+                    }
+                    CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
+                    return customerResponseDto;
+                })
+                .toList();
+    }
+
+    @Override
+    public List<CustomerResponseDto> getCustomersByEmail(String email) {
+        List<Customer> customers = customerRepository.findByEmailContainingIgnoreCase(email);
+
+        return customers.stream()
+                .map(customer -> {
+                    Optional<Account> optionalAccount = accountRepository.findByCustomerIdAndAccountStatus(customer.getCustomerId(),"Active");
+                    AccountResponseDto accountResponseDto = new AccountResponseDto();
+                    if(optionalAccount.isPresent()) {
+                        accountResponseDto = AccountMapper.mapToAccountResponseDto(optionalAccount.get(), new AccountResponseDto());
+                    }
+                    CustomerResponseDto customerResponseDto = CustomerMapper.mapToCustomerResponseDto(customer, new CustomerResponseDto(),accountResponseDto);
+                    return customerResponseDto;
+                })
+                .toList();
     }
 
     @Override

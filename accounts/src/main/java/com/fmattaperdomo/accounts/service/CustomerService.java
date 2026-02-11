@@ -11,13 +11,19 @@ public interface CustomerService {
      * @param mobileNumber - Input mobile number
      * @return Customer Details based on a given mobileNumber
      */
-    CustomerResponseDto getCustomerByMobileNumber(String mobileNumber);
+    List<CustomerResponseDto> getCustomersByMobileNumber(String mobileNumber);
+    /**
+     *
+     * @param name - Input customer name
+     * @return Customer Details based on a given mobileNumber
+     */
+    List<CustomerResponseDto> getCustomersByName(String name);
     /**
      *
      * @param email - Input email
      * @return Customer Details based on a given email
      */
-    CustomerResponseDto getCustomerByEmail(String email);
+    List<CustomerResponseDto> getCustomersByEmail(String email);
     /**
      *
      * @param customerId - Input customer ID
