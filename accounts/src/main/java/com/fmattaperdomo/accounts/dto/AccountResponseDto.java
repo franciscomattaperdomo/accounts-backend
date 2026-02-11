@@ -35,4 +35,8 @@ public class AccountResponseDto {
             description = "Account status in the response"
     )
     private String accountStatus;
+    @Schema(
+            description = "Customer name in the response"
+    )
+    private String customerName;
 }

@@ -3,6 +3,7 @@ package com.fmattaperdomo.accounts.service;
 import com.fmattaperdomo.accounts.dto.AccountCreateRequestDto;
 import com.fmattaperdomo.accounts.dto.AccountResponseDto;
 import com.fmattaperdomo.accounts.dto.AccountUpdateRequestDto;
+import com.fmattaperdomo.accounts.dto.CustomerResponseDto;
 
 import java.util.List;
 
@@ -54,4 +55,9 @@ public interface AccountService {
      * @return list Account indicating if the search of Account details is successful or not
      */
     List<AccountResponseDto> getAccountsByAccountStatus(String accountStatus);
+    /**
+     *
+     * @return List of All Accounts Details
+     */
+    List<AccountResponseDto> getAccounts();
 }

@@ -4,11 +4,13 @@ import com.fmattaperdomo.accounts.constant.AccountConstant;
 import com.fmattaperdomo.accounts.dto.AccountCreateRequestDto;
 import com.fmattaperdomo.accounts.dto.AccountResponseDto;
 import com.fmattaperdomo.accounts.dto.AccountUpdateRequestDto;
+import com.fmattaperdomo.accounts.dto.CustomerResponseDto;
 import com.fmattaperdomo.accounts.entity.Account;
 import com.fmattaperdomo.accounts.entity.Customer;
 import com.fmattaperdomo.accounts.exception.AccountAlreadyExistsException;
 import com.fmattaperdomo.accounts.exception.ResourceNotFoundException;
 import com.fmattaperdomo.accounts.mapper.AccountMapper;
+import com.fmattaperdomo.accounts.mapper.CustomerMapper;
 import com.fmattaperdomo.accounts.repository.AccountRepository;
 import com.fmattaperdomo.accounts.repository.CustomerRepository;
 import com.fmattaperdomo.accounts.service.AccountService;
@@ -165,5 +167,21 @@ public class AccountServiceImpl implements AccountService {
                 .map(account -> AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto()))
                 .toList();
 
+    }
+
+    @Override
+    public List<AccountResponseDto> getAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+
+        return accounts.stream()
+                .map(account -> {
+                    AccountResponseDto accountResponseDto = AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto());
+                    Optional<Customer> optionalCustomer = customerRepository.findById(account.getCustomerId());
+                    if(optionalCustomer.isPresent()) {
+                        accountResponseDto.setCustomerName(optionalCustomer.get().getName());
+                    }
+                    return accountResponseDto;
+                })
+                .toList();
     }
 }

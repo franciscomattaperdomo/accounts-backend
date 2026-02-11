@@ -71,9 +71,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerResponseDto> getCustomers() {
         List<Customer> customers = customerRepository.findAll();
-        //if(customers.isEmpty()) {
-        //    throw new ResourceNotFoundException("Customer","customer","All");
-        //}
 
         return customers.stream()
                 .map(customer -> {

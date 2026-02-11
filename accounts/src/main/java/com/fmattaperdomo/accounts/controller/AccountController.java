@@ -187,6 +187,30 @@ public class AccountController {
         AccountResponseDto accountResponseDto = accountService.getAccountByCustomerId(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(accountResponseDto);
     }
+
+    @Operation(
+            summary = "Fetch Account Details REST API",
+            description = "REST API to fetch Accounts  "
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/accounts/all")
+    public ResponseEntity<List<AccountResponseDto>> getAccounts() {
+        List<AccountResponseDto> accountsResponseDto = accountService.getAccounts();
+        return ResponseEntity.status(HttpStatus.OK).body(accountsResponseDto);
+    }
+
     @Operation(
             summary = "Update Account Details REST API",
             description = "REST API to update Account details based on a account id"
