@@ -1,19 +1,37 @@
-# Apertura de Cuentas para Clientes Nuevos (backend)
+# Microservicio de Apertura de Cuentas para clientes nuevos (Backend)
 
 ## 📋 Descripción General
 
-Este es un microservicio desarrollado con **Spring Boot 4.0.0** que gestiona cuentas bancarias y clientes. Proporciona una API REST completa para operaciones CRUD de clientes y cuentas, con validación de datos, manejo de excepciones y cobertura de pruebas unitarias.
+Este es un microservicio desarrollado con **Spring Boot 4.0.0** que gestiona cuentas bancarias y clientes de una entidad financiera. Proporciona una API REST completa y robusta para operaciones CRUD de clientes y cuentas, con validación exhaustiva de datos, manejo centralizado de excepciones, auditoría automática de entidades y cobertura integral de pruebas unitarias.
+
+El microservicio implementa las mejores prácticas de desarrollo incluyendo:
+- Separación clara de responsabilidades (Controller-Service-Repository)
+- DTOs para transferencia de datos
+- Mapeadores de entidades
+- Excepciones personalizadas
+- Validaciones bean-based
+- Documentación interactiva con Swagger/OpenAPI
 
 ## 🎯 Características Principales
 
-- ✅ Gestión completa de Clientes (Create, Read, Update, Delete)
-- ✅ Gestión completa de Cuentas (Create, Read, Update, Delete)
-- ✅ Validación de datos integrada
-- ✅ Manejo centralizado de excepciones
-- ✅ Cobertura de pruebas unitarias (>80%)
-- ✅ Documentación OpenAPI/Swagger
-- ✅ Base de datos H2 (en desarrollo)
-- ✅ Métricas con JaCoCo
+- ✅ **Gestión completa de Clientes** (Create, Read, Update, Delete)
+  - Búsqueda por ID, Email, Número de móvil
+  - Listado de todos los clientes
+  - Validación de datos únicos (Email, Móvil, Documento)
+  
+- ✅ **Gestión completa de Cuentas** (Create, Read, Update, Delete)
+  - Búsqueda por múltiples criterios (Cliente, Sucursal, Tipo, Estado)
+  - Generación automática de números de cuenta
+  - Gestión del estado de cuentas
+  
+- ✅ **Validación de datos** integrada con Jakarta Validation
+- ✅ **Manejo centralizado de excepciones** con GlobalExceptionHandler
+- ✅ **Auditoría automática** de creación y modificación
+- ✅ **Cobertura de pruebas unitarias** >80% (59 tests)
+- ✅ **Documentación OpenAPI/Swagger** interactiva
+- ✅ **Base de datos H2** embebida (desarrollo) / PostgreSQL (producción)
+- ✅ **Métricas de cobertura** con JaCoCo
+- ✅ **CORS habilitado** para cliente Angular
 
 ## 🏗️ Arquitectura
 
@@ -78,11 +96,11 @@ API REST para gestión de clientes:
 #### **AccountController**
 API REST para gestión de cuentas:
 - `POST /api/accounts` - Crear cuenta
-- `GET /api/accounts/customerId/{customerId}` - Obtener cuentas por cliente
+- `GET /api/accounts/customerId/{customerId}` - Obtener cuentas por cliente (lista)
 - `GET /api/accounts/branchName/{branchName}` - Obtener cuentas por sucursal
 - `GET /api/accounts/accountType/{accountType}` - Obtener cuentas por tipo
 - `GET /api/accounts/accountStatus/{accountStatus}` - Obtener cuentas por estado
-- `GET /api/accounts` - Obtener cuenta por cliente (parámetro)
+- `GET /api/accounts?customerId={customerId}` - Obtener cuenta activa por cliente
 - `GET /api/accounts/all` - Obtener todas las cuentas
 - `PUT /api/accounts/{accountId}` - Actualizar cuenta
 - `DELETE /api/accounts/{accountId}` - Eliminar cuenta
@@ -486,8 +504,9 @@ Este proyecto está bajo licencia MIT.
 
 Para reportar problemas o sugerencias, contactar al equipo de desarrollo.
 
----
+------
 
-**Última actualización**: Febrero 11, 2026  
-**Versión**: 0.0.1-SNAPSHOT
-
+**Última revisión**: 11 de Febrero, 2026  
+**Versión del README**: 2.1  
+**Versión de la Aplicación**: 0.0.1-SNAPSHOT  
+**Estado**: ✅ Completado y documentado
