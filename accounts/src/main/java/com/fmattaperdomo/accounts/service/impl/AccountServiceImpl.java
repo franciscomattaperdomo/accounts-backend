@@ -110,12 +110,16 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountResponseDto> getAccountsByCustomerId(Long customerId) {
         List<Account> accounts = accountRepository.findByCustomerId(customerId);
-        if(accounts.isEmpty()) {
-            throw new ResourceNotFoundException("Account","customerId",customerId.toString());
-        }
 
         return accounts.stream()
-                .map(account -> AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto()))
+                .map(account -> {
+                    AccountResponseDto accountResponseDto =AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto());
+                    Optional<Customer> optionalCustomer = customerRepository.findById(account.getCustomerId());
+                    if(optionalCustomer.isPresent()) {
+                        accountResponseDto.setCustomerName(optionalCustomer.get().getName());
+                    }
+                    return accountResponseDto;
+                })
                 .toList();
     }
 
@@ -126,12 +130,16 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountResponseDto> getAccountsByBranchName(String branchName) {
         List<Account> accounts = accountRepository.findByBranchNameContainingIgnoreCase(branchName);
-        if(accounts.isEmpty()) {
-            throw new ResourceNotFoundException("Account","branchName",branchName);
-        }
 
         return accounts.stream()
-                .map(account -> AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto()))
+                .map(account -> {
+                    AccountResponseDto accountResponseDto =AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto());
+                    Optional<Customer> optionalCustomer = customerRepository.findById(account.getCustomerId());
+                    if(optionalCustomer.isPresent()) {
+                        accountResponseDto.setCustomerName(optionalCustomer.get().getName());
+                    }
+                    return accountResponseDto;
+                })
                 .toList();
     }
 
@@ -142,12 +150,16 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountResponseDto> getAccountsByAccountType(String accountType) {
         List<Account> accounts = accountRepository.findByAccountTypeContainingIgnoreCase(accountType);
-        if(accounts.isEmpty()) {
-            throw new ResourceNotFoundException("Account","accountType",accountType);
-        }
 
         return accounts.stream()
-                .map(account -> AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto()))
+                .map(account -> {
+                    AccountResponseDto accountResponseDto =AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto());
+                    Optional<Customer> optionalCustomer = customerRepository.findById(account.getCustomerId());
+                    if(optionalCustomer.isPresent()) {
+                        accountResponseDto.setCustomerName(optionalCustomer.get().getName());
+                    }
+                    return accountResponseDto;
+                })
                 .toList();
     }
 
@@ -159,14 +171,17 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountResponseDto> getAccountsByAccountStatus(String accountStatus) {
         List<Account> accounts = accountRepository.findByAccountStatusContainingIgnoreCase(accountStatus);
-        if(accounts.isEmpty()) {
-            throw new ResourceNotFoundException("Account","accountType",accountStatus);
-        }
 
         return accounts.stream()
-                .map(account -> AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto()))
+                .map(account -> {
+                    AccountResponseDto accountResponseDto =AccountMapper.mapToAccountResponseDto(account, new AccountResponseDto());
+                    Optional<Customer> optionalCustomer = customerRepository.findById(account.getCustomerId());
+                    if(optionalCustomer.isPresent()) {
+                        accountResponseDto.setCustomerName(optionalCustomer.get().getName());
+                    }
+                    return accountResponseDto;
+                })
                 .toList();
-
     }
 
     @Override
